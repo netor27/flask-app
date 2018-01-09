@@ -18,3 +18,13 @@ def test_app(client):
     name = os.environ.get('HELLO_NAME') or load_config('name')
     assert 'hello ' + name in str(response.data)
     assert 'fail' not in str(response.data)
+
+def test_time_view(client):
+    response = client.get(url_for('timeApi.index'))
+    assert response.status_code == 200
+    assert 'Hello world!' in str(response.data)
+    assert 'This is a test view to show the current time' in str(response.data)
+    assert 'host' in str(response.data)
+    assert 'time' in str(response.data)
+    assert 'fail' not in str(response.data)
+    
